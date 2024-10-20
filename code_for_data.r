@@ -1,6 +1,18 @@
 
-library("readxl")
+library(readxl)
+library(data.table)
 
-data1 <- read_excel('biomarkers.xlsx')
+data1 <- data.table(read_excel('biomarkers.xlsx'))
 data2 <- read_excel('covariates.xlsx')
-print(data1)
+
+
+
+
+data1[, c("PatientID","Biomarker") := tstrsplit(Biomarker, "-",
+                fixed = TRUE)]
+
+
+
+print(data1[PatientID==5])
+
+
